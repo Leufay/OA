@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>tree.html</title>
+	
+    <meta name="keywords" content="keyword1,keyword2,keyword3">
+    <meta name="description" content="this is my page">
+    <meta name="content-type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" type="text/css" href="./style/zTreeStyle/zTreeIcons.css"/>
+    <link rel="stylesheet" type="text/css" href="./style/zTreeStyle/zTreeStyle.css"/>
+	<script type="text/javascript" src="./script/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="./script/jquery-ztree-2.5.js"></script>
+	<script type="text/javascript">
+	
+		var setting = {
+		isSimpleData: true,
+		treeNodeKey: "menuId",
+		treeNodeParentKey: "parentId",
+		showLine: true,
+		root:{ 
+			isRoot:true,
+			nodes:[]
+			}
+		};
+		$().ready(function(){
+			$.post("menu/menuItemAction_findAll.action",null,function(data){
+				zTree = $("#tree").zTree(setting, data.oList);
+			}) ;
+		});
+	</script>
+  </head>
+  	
+  <body>
+   		<TABLE border=0 height=600px align=left>
+	<TR>
+		<TD width=230px align=left valign=top style="BORDER-RIGHT: #999999 1px dashed">
+			<ul id="tree" class="tree" style="width:230px; overflow:auto;"></ul>
+		</TD>
+		
+	</TR>
+</TABLE>
+
+	<p>
+		<input placeholder="请输入密码" />
+	</p>
+  </body>
+</html>

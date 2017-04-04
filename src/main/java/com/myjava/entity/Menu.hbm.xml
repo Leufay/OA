@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.myjava.entity">
+	<class name="MenuItem" table="menu">
+		<id name="menuId" column="menu_id">
+		<generator class="assigned"></generator>
+		</id>
+		<property name="name" column="menu_name"></property>
+		<property name="icon" column="icon_path"></property>
+		<property name="isParent" column="is_parent"></property>
+		<property name="parentId" column="parentId"></property>
+		<property name="url" column="url"></property>
+		<property name="target" column="target"></property>
+	</class>
+</hibernate-mapping>

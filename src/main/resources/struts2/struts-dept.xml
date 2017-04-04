@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="dept" namespace="/dept" extends="global-default">
+		<action name="deptAction_*" class="deptAction" method="{1}">
+			<result name="list">/WEB-INF/jsp/system/dept/list.jsp</result>
+			<result name="addUI">/WEB-INF/jsp/system/dept/addUI.jsp</result>
+			<result name="updateUI">/WEB-INF/jsp/system/dept/updateUI.jsp</result>
+			<result name="toList" type="redirectAction">
+				<param name="actionName">deptAction_list</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.myjava.entity">
+	<class name="Role" table="ROLE">
+		<id name="roleId" column="role_id" type="long" length="5">
+			<generator class="identity"></generator>
+		</id>
+		<property name="roleName" column="role_name"/>
+		<property name="roleDescr" column="role_descr"/>
+		<!-- 角色和用户多对多关系 -->
+		<set name="users" table="role_user">
+			<key column="role_id"></key>
+			<many-to-many class="User" column="user_id"/>
+		</set>
+		<!-- 角色和权限多对多关系 -->
+		<set name="privileges" table="role_privilege">
+			<key column="role_id"></key>
+			<many-to-many class="Privilege" column="privil_id"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

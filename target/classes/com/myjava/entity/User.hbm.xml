@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.myjava.entity">
+	<class name="User" table="user">
+		<id name="userId" column="user_id" type="long" length="5">
+			<generator class="identity"></generator>
+		</id>
+		<property name="username" />
+		<property name="password" />
+		<property name="realName"/>
+		<property name="email" />
+		<property name="sex" />
+		<property name="phone"/>
+		<!-- 本类与部门多对一关系 -->
+		<many-to-one class="Dept" name="dept" column="dept_id" />
+		<!-- 本类与角色多对多关系 -->
+		<set name="roles" table="role_user" >
+			<key column="user_id"></key>
+			<many-to-many class="Role" column="role_id" ></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>

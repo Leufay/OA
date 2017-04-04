@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 配置为开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 配置扩展名为action(在struts2.default.properties中) -->
+	<constant name="struts.action.extension" value="action" />
+	<!-- 配置主题 -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 让OGNL中可以使用静态的方法 -->
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	
+	
+	<include file="struts2/struts-dept.xml"></include>
+	<include file="struts2/struts-user.xml"></include>
+	<include file="struts2/struts-menu.xml"></include>
+	<include file="struts2/struts-login.xml"></include>
+	<include file="struts2/struts-role.xml"></include>
+	<include file="struts2/struts-privilege.xml"></include>
+	
+	<!-- ================================全局的处理================================= -->
+	<package name="global-default" namespace="/"  extends="json-default">
+		<!-- 全局的interceptor -->
+		<interceptors>
+			<interceptor class="com.myjava.interceptor.PrivilegeInterceptor" name="privilegeInterceptor"></interceptor>
+			<interceptor-stack name="myInteceptor">
+				<interceptor-ref name="privilegeInterceptor"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
+		 <default-interceptor-ref name="myInteceptor"></default-interceptor-ref>
+		
+		<!-- 全局result -->
+		<global-results>
+		<!--  
+			<result name="errorHandler" type="chain">
+				<param name="actionName">exceptionResolver</param>
+			</result>
+			-->
+			<result name="toLogin">/WEB-INF/jsp/login/login.jsp</result>
+			<result name="toIndex" type="redirectAction">loginAction_toIndex</result>
+			<result name="index">/WEB-INF/jsp/login/index.jsp</result>
+			<result name="left">/WEB-INF/jsp/login/left.jsp</result>
+			<result name="right">/WEB-INF/jsp/login/right.jsp</result>
+			<result name="bottom">/WEB-INF/jsp/login/bottom.jsp</result>
+			<result name="top">/WEB-INF/jsp/login/top.jsp</result>
+		</global-results>
+	<!--  
+		<global-exception-mappings >
+			<exception-mapping result="errorHandler" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+		-->
+		<!-- 自定义的异常处理Action -->
+				<!--  
+		<action name="exceptionResolver" class="com.myjava.exceptionresolver.ExceptionResolverAction">
+			<result name="error">/WEB-INF/index.jsp</result>
+		</action>
+		-->
+	</package>
+</struts>

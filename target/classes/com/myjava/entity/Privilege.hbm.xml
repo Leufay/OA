@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.myjava.entity">
+	<class name="Privilege" table="PRIVILEGE">
+		<id name="id" column="privil_id" type="long" length="5">
+			<generator class="assigned"></generator>
+		</id>
+		<property name="name" column="privil_name"/>
+		<property name="pid" column="parent_id"/>
+		<property name="icon" column="icon"/>
+		<property name="flag" column="flag"/>
+		<property name="isParent" column="isParent"/>
+		<set name="roles" table="role_privilege">
+			<key column="privil_id"></key>
+			<many-to-many class="Role" column="role_id"></many-to-many>
+		</set>
+	</class>
+</hibernate-mapping>
